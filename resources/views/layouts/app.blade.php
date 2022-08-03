@@ -38,6 +38,9 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->is('menu*') ? 'active' : '' }}" href="{{ route('menu.index') }}">{{ __('Menu') }}</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->is('kategori-makanan*') ? 'active' : '' }}" href="{{ route('foodCategory.index') }}">{{ __('Kategori Makanan') }}</a>
+                            </li>
                         @endauth
                     </ul>
 

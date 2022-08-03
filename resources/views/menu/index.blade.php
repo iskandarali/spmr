@@ -14,53 +14,47 @@
                     </div>
                     @endif
                     <a href="{{ route('menu.create') }}" class="btn btn-primary float-end">Tambah Menu</a>
-                    <table class="table table-striped caption-top mt-5">
+                    <table class="table table-striped caption-top mt-5 align-middle">
                         <caption>Senarai Hidangan</caption>
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Kategori Makanan</th>
+                                <th>&nbsp;</th>
                                 <th>Nama Hidangan</th>
                                 <th>Butiran</th>
                                 <th>Harga</th>
+                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                            <tr>
-                                <td>1</td>
-                                <td>Sarapan</td>
-                                <td>Roti Canai</td>
-                                <td>Roti Kosong beserta kuah dal/kari</td>
-                                <td>RM 1.20</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Sarapan</td>
-                                <td>Nasi Lemak</td>
-                                <td>Nasi lemak dan sambal tumis beserta telor rebus dan ikan bilis</td>
-                                <td>RM 2.00</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Makan Tengah hari</td>
-                                <td>Nasi Ayam</td>
-                                <td>Nasi dan ayam roasted beserta sos dan kicap istimewa</td>
-                                <td>RM 8.00</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Minum petang</td>
-                                <td>Cucur Udang</td>
-                                <td>1 set cucur udang (5 biji) beserta sos cili</td>
-                                <td>RM 6.00</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Makan malam</td>
-                                <td>Lamb Chop</td>
-                                <td>500g Kambing beserta kentang putar dan salad</td>
-                                <td>RM 15.00</td>
-                            </tr>
+                            @php $bil = 1 @endphp
+                            @forelse ($menus as $menu)
+                                <tr>
+                                    <td>{{ $bil }}</td>
+                                    <td>{{ $menu->categories->name ?? '-' }}</td>
+                                    <td><img src="{{ $menu->photo ?? '/images/blank.png' }}" class="image-fluid" width="60" height="60"></td>
+                                    <td>{{ $menu->name ?? '-' }}</td>
+                                    <td>{{ $menu->description ?? '-' }}</td>
+                                    <td>RM {{ number_format($menu->price ?? '-', 2) }}</td>
+                                    <td>
+                                        <form action="{{ route('menu.destroy',$menu->id) }}" method="POST">
+                                            <a class="btn btn-info btn-sm" href="{{ route('menu.show',$menu->id) }}">Papar</a>
+                                            <a class="btn btn-primary btn-sm" href="{{ route('menu.edit',$menu->id) }}">Kemaskini</a>
+
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit" class="btn btn-danger btn-sm">Padam</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @php $bil++ @endphp
+                            @empty
+                                <tr>
+                                    <td>Tiada Menu</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

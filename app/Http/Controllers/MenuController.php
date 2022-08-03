@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FoodCategory;
+use App\Models\Menu;
+use Auth;
+use File;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -13,7 +17,9 @@ class MenuController extends Controller
      */
     public function index()
     {
-        return view('menu.index');
+        $menus = Menu::all();
+
+        return view('menu.index', compact('menus'));
     }
 
     /**
@@ -23,7 +29,9 @@ class MenuController extends Controller
      */
     public function create()
     {
-        return view('menu.create');
+        $categories = FoodCategory::all();
+
+        return view('menu.create', compact('categories'));
     }
 
     /**
@@ -35,12 +43,23 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'category' => ['required'],
             'name' => ['required', 'max:255'],
             'description' => ['required'],
             'photo' => ['image']
         ]);
 
-        dd($request->all());
+        $user = Auth::user();
+
+        $menu = new Menu;
+        $menu->category_id = $request->category;
+        $menu->name = $request->name;
+        $menu->description = $request->description;
+        $menu->price = $request->price;
+
+        $user->menus()->save($menu);
+
+        return to_route('menu.index');
     }
 
     /**
@@ -60,9 +79,11 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Menu $menu)
     {
-        //
+        $categories = FoodCategory::all();
+
+        return view('menu.edit', compact('menu', 'categories'));
     }
 
     /**
@@ -72,9 +93,35 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Menu $menu)
     {
-        //
+        $request->validate([
+            'category' => ['required'],
+            'name' => ['required', 'max:255'],
+            'description' => ['required'],
+            'photo' => ['image']
+        ]);
+
+        $menu->category_id = $request->category;
+        $menu->name = $request->name;
+        $menu->description = $request->description;
+        $menu->price = $request->price;
+
+        if ($image = $request->file('photo')) {
+            $imagePath = public_path('storage/'.$menu->photo);
+            // dd($imagePath);
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+            $image = request()->file('photo')->store('uploads', 'public');
+            $menu->photo = $image;
+        } else {
+            unset($menu->photo);
+        }
+
+        $menu->save();
+
+        return back()->with('status', 'Menu telah dikemaskini!');;
     }
 
     /**
