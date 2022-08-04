@@ -32,6 +32,32 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Manufacturer
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $address
+ * @property string|null $phone
+ * @property string|null $email
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\ManufacturerFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Manufacturer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Manufacturer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Manufacturer query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Manufacturer whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Manufacturer whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Manufacturer whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Manufacturer whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Manufacturer whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Manufacturer wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Manufacturer whereUpdatedAt($value)
+ */
+	class Manufacturer extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Menu
  *
  * @property int $id
@@ -63,6 +89,36 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Product
+ *
+ * @property int $id
+ * @property string $title
+ * @property string|null $description
+ * @property string $short_notes
+ * @property string $price
+ * @property string|null $image
+ * @property string|null $slug
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\ProductFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereShortNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
+ */
+	class Product extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\State
  *
  * @property int $id
@@ -77,6 +133,32 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|State whereUpdatedAt($value)
  */
 	class State extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Supplier
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $address
+ * @property string|null $phone
+ * @property string|null $email
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Database\Factories\SupplierFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereUpdatedAt($value)
+ */
+	class Supplier extends \Eloquent {}
 }
 
 namespace App\Models{

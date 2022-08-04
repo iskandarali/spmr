@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\FoodCategoryController;
+use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StateController;
+use App\Http\Controllers\SupplierController;
+use App\Models\Menu;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +21,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $menus = Menu::orderBy('category_id')->get();
+
+    return view('welcome', compact('menus'));
 });
 
 Auth::routes();
@@ -30,6 +36,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('kategori-makanan', FoodCategoryController::class)->names('foodCategory');
 
     Route::resource('negeri', StateController::class)->names('state');
+
+    Route::resource('product', ProductController::class)->names(['create' => 'add']);
+
+    Route::resource('supplier', SupplierController::class)->names('supplier');
+
+    Route::resource('manufacturer', ManufacturerController::class)->names('manufacturer');
 
     Route::get('escribeme', function () {
         return "Contactme";

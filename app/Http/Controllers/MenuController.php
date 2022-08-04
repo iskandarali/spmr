@@ -57,6 +57,16 @@ class MenuController extends Controller
         $menu->description = $request->description;
         $menu->price = $request->price;
 
+        if ($image = $request->file('photo')) {
+            $imagePath = public_path('storage/'.$menu->photo);
+            // dd($imagePath);
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+            $image = request()->file('photo')->store('uploads', 'public');
+            $menu->photo = $image;
+        }
+
         $user->menus()->save($menu);
 
         return to_route('menu.index');
@@ -121,7 +131,7 @@ class MenuController extends Controller
 
         $menu->save();
 
-        return back()->with('status', 'Menu telah dikemaskini!');;
+        return back()->with('status', 'Menu telah dikemaskini!');
     }
 
     /**
@@ -130,8 +140,10 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Menu $menu)
     {
-        //
+        $menu->delete();
+
+        return to_route('menu.index')->with('status', 'Menu telah dipadam!');
     }
 }

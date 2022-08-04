@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Menu') }}</div>
+                <div class="card-header">{{ __('Pengilang') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,41 +13,40 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <a href="{{ route('foodCategory.create') }}" class="btn btn-primary float-end">Tambah Menu</a>
+                    <a href="{{ route('manufacturer.create') }}" class="btn btn-primary float-end">Tambah Pembekal</a>
                     <table class="table table-striped caption-top mt-5 align-middle">
-                        <caption>Senarai Hidangan</caption>
+                        <caption>Senarai Pengilang</caption>
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Kategori Makanan</th>
-                                <th>&nbsp;</th>
-                                <th>Nama Hidangan</th>
-                                <th>Butiran</th>
-                                <th>Harga</th>
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>No. Telefon</th>
+                                <th>Emel</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
                             @php $bil = 1 @endphp
-                            @forelse ($menus as $menu)
-                                <tr>
-                                    <td>{{ $bil }}</td>
-                                    <td>{{ $menu->categories->name ?? '-' }}</td>
-                                    <td><img src="{{ $menu->photo ?? '/images/blank.png' }}" class="image-fluid" width="60" height="60"></td>
-                                    <td>{{ $menu->name ?? '-' }}</td>
-                                    <td>{{ $menu->description ?? '-' }}</td>
-                                    <td>RM {{ number_format($menu->price ?? '-', 2) }}</td>
-                                    <td class="text-end">
-                                        {{-- <a class="btn btn-info btn-sm" href="{{ route('menu.show',$menu->id) }}">Papar</a> --}}
-                                        <a class="btn btn-primary btn-sm" href="{{ route('menu.edit',$menu->id) }}">Kemaskini</a>
-                                        <button type="button" class="btn btn-outline-danger btn-sm" onClick='showModel({!! $menu->id !!})'>Delete</button>
-                                    </td>
-                                </tr>
-                                @php $bil++ @endphp
+                            @forelse ($manufacturers as $manufacturer)
+                            <tr>
+                                <td>{{ $bil }}</td>
+                                <td>{{ $manufacturer->name ?? '-' }}</td>
+                                <td>{{ $manufacturer->address ?? '-' }}</td>
+                                <td>{{ $manufacturer->phone ?? '-' }}</td>
+                                <td>{{ $manufacturer->email ?? '-' }}</td>
+                                <td class="text-end">
+                                    <a class="btn btn-primary btn-sm"
+                                        href="{{ route('manufacturer.edit',$manufacturer->id) }}">Kemaskini</a>
+                                    <button type="button" class="btn btn-outline-danger btn-sm"
+                                        onClick='showModel({!! $manufacturer->id !!})'>Delete</button>
+                                </td>
+                            </tr>
+                            @php $bil++ @endphp
                             @empty
-                                <tr>
-                                    <td class="text-center" colspan="7">Tiada Menu</td>
-                                </tr>
+                            <tr>
+                                <td class="text-center" colspan="7">Tiada pengilang</td>
+                            </tr>
                             @endforelse
                         </tbody>
                     </table>
@@ -76,7 +75,7 @@
 <script>
     function showModel(id) {
 	var frmDelete = document.getElementById("delete-frm");
-	frmDelete.action = 'menu/'+id;
+	frmDelete.action = 'manufacturer/'+id;
 	var confirmationModal = document.getElementById("deleteConfirmationModel");
 	confirmationModal.style.display = 'block';
 	confirmationModal.classList.remove('fade');

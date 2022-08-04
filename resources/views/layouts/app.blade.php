@@ -41,6 +41,20 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->is('kategori-makanan*') ? 'active' : '' }}" href="{{ route('foodCategory.index') }}">{{ __('Kategori Makanan') }}</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->is('product*') ? 'active' : '' }}" href="{{ route('product.index') }}">{{ __('Product')
+                                    }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->is('supplier*') ? 'active' : '' }}" href="{{ route('supplier.index') }}">{{
+                                    __('Pembekal')
+                                    }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->is('manufacturer*') ? 'active' : '' }}" href="{{ route('manufacturer.index') }}">{{
+                                    __('Pengilang')
+                                    }}</a>
+                            </li>
                         @endauth
                     </ul>
 

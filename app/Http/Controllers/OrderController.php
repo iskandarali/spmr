@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreFoodCategoryRequest;
-use App\Http\Requests\UpdateFoodCategoryRequest;
-use App\Models\FoodCategory;
+use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\UpdateOrderRequest;
+use App\Models\Order;
 
-class FoodCategoryController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,7 @@ class FoodCategoryController extends Controller
      */
     public function index()
     {
-        $categories = FoodCategory::all();
-        return view('food-category.index', compact('categories'));
+        //
     }
 
     /**
@@ -32,10 +31,10 @@ class FoodCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreFoodCategoryRequest  $request
+     * @param  \App\Http\Requests\StoreOrderRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreFoodCategoryRequest $request)
+    public function store(StoreOrderRequest $request)
     {
         //
     }
@@ -43,10 +42,10 @@ class FoodCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\FoodCategory  $foodCategory
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(FoodCategory $foodCategory)
+    public function show(Order $order)
     {
         //
     }
@@ -54,10 +53,10 @@ class FoodCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\FoodCategory  $foodCategory
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(FoodCategory $foodCategory)
+    public function edit(Order $order)
     {
         //
     }
@@ -65,11 +64,11 @@ class FoodCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateFoodCategoryRequest  $request
-     * @param  \App\Models\FoodCategory  $foodCategory
+     * @param  \App\Http\Requests\UpdateOrderRequest  $request
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateFoodCategoryRequest $request, FoodCategory $foodCategory)
+    public function update(UpdateOrderRequest $request, Order $order)
     {
         //
     }
@@ -77,10 +76,10 @@ class FoodCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\FoodCategory  $foodCategory
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FoodCategory $foodCategory)
+    public function destroy(Order $order)
     {
         //
     }
