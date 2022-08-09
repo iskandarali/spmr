@@ -41,6 +41,7 @@ namespace App\Models{
  * @property string|null $email
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Product|null $products
  * @method static \Database\Factories\ManufacturerFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Manufacturer newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Manufacturer newQuery()
@@ -89,6 +90,31 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Order
+ *
+ * @property int $id
+ * @property string $order_no
+ * @property int $product_id
+ * @property int $quantities
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Product $products
+ * @method static \Database\Factories\OrderFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereOrderNo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereQuantities($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereUpdatedAt($value)
+ */
+	class Order extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Product
  *
  * @property int $id
@@ -98,8 +124,12 @@ namespace App\Models{
  * @property string $price
  * @property string|null $image
  * @property string|null $slug
+ * @property int|null $manufacturer_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Manufacturer|null $manufacturer
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Supplier[] $suppliers
+ * @property-read int|null $suppliers_count
  * @method static \Database\Factories\ProductFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
@@ -108,6 +138,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Product whereManufacturerId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereShortNotes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereSlug($value)
@@ -115,6 +146,29 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
  */
 	class Product extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\RunningNumber
+ *
+ * @property int $id
+ * @property string $year
+ * @property int $number
+ * @property string|null $type
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|RunningNumber newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RunningNumber newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|RunningNumber query()
+ * @method static \Illuminate\Database\Eloquent\Builder|RunningNumber whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RunningNumber whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RunningNumber whereNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RunningNumber whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RunningNumber whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|RunningNumber whereYear($value)
+ */
+	class RunningNumber extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -144,6 +198,7 @@ namespace App\Models{
  * @property string|null $address
  * @property string|null $phone
  * @property string|null $email
+ * @property int|null $product_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Database\Factories\SupplierFactory factory(...$parameters)
@@ -156,6 +211,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Supplier wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereProductId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Supplier whereUpdatedAt($value)
  */
 	class Supplier extends \Eloquent {}

@@ -2,40 +2,57 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-12 text-center">
-            <h1 class="display-one m-3">PHP Laravel Project - CRUD</h1>
-            <div class="text-left">
-                <a href="product/create" class="btn btn-outline-primary">Add new product</a>
-            </div>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">{{ __('Produk') }}</div>
 
-            <table class="table mt-3  text-left align-middle">
-                <thead>
-                    <tr>
-                        <th scope="col">Product Title</th>
-                        <th scope="col" class="pr-5">Price (USD)</th>
-                        <th scope="col">Short Notes</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                    @forelse($products as $product)
-                    <tr>
-                        <td>{!! $product->title !!}</td>
-                        <td class="pr-5 text-right">{!! $product->price !!}</td>
-                        <td>{!! $product->short_notes !!}</td>
-                        <td><a href="/product/{!! $product->id !!}/edit" class="btn btn-outline-primary">Edit</a>
-                            <button type="button" class="btn btn-outline-danger ml-1"
-                                onClick='showModel({!! $product->id !!})'>Delete</button>
-                        </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="3">No products found</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                <div class="card-body">
+                    @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+                    <a href="{{ route('add') }}" class="btn btn-primary float-end">Tambah Produk</a>
+
+                    <table class="table table-striped caption-top mt-5 align-middle">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product Title</th>
+                                <th scope="col" class="pr-5">Price (USD)</th>
+                                <th scope="col">Short Notes</th>
+                                <th scope="col">Pengilang</th>
+                                <th scope="col">Pembekal</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            @forelse($products as $product)
+                            <tr>
+                                <td>{!! $product->title !!}</td>
+                                <td class="pr-5 text-right">{!! $product->price !!}</td>
+                                <td>{!! $product->short_notes !!}</td>
+                                <td>{!! $product->manufacturer->name ?? '--' !!}</td>
+                                <td>
+                                    @foreach ($product->suppliers as $supplier )
+                                        {{ $loop->first ? '' : ', ' }}
+                                        {{ $supplier->name }}
+                                    @endforeach
+                                </td>
+                                <td><a href="/product/{!! $product->id !!}/edit" class="btn btn-outline-primary">Edit</a>
+                                    <button type="button" class="btn btn-outline-danger ml-1"
+                                        onClick='showModel({!! $product->id !!})'>Delete</button>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td class="text-center" colspan="4">No products found</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

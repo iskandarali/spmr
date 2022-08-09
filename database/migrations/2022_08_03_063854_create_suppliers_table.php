@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
+            $table->foreignId('product_id')->nullable()->constrained('products');
             $table->timestamps();
         });
     }

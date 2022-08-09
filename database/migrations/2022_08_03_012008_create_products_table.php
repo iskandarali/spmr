@@ -21,7 +21,7 @@ return new class extends Migration
             $table->decimal('price', 10, 2); // price
             $table->text('image')->nullable(); // product image
             $table->text('slug')->nullable(); // product slug
-
+            $table->foreignId('manufacturer_id')->nullable()->constrained('manufacturers');
             $table->timestamps();
         });
     }

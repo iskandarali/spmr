@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
+use App\Models\Product;
 
 class OrderController extends Controller
 {
@@ -15,7 +16,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all();
+
+        return view('order.index', compact('orders'));
     }
 
     /**
@@ -25,7 +28,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $products = Product::all();
+
+        return view('order.create', compact('products'));
     }
 
     /**
@@ -36,7 +41,12 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        //
+        $order = Order::create($request->all());
+
+        session()->flash('status', 'Order ditambah');
+
+        return to_route('order.index');
+
     }
 
     /**

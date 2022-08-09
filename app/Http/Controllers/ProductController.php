@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Manufacturer;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -15,8 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all(); //fetch all products from DB
-
+        $products = Product::with(['manufacturer', 'suppliers'])->get(); //fetch all products from DB
+        // dd($products);
         return view('product.list', ['products' => $products]);
     }
 
@@ -27,7 +28,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.add');
+        $manufacturers = Manufacturer::all();
+
+        return view('product.add', compact('manufacturers'));
     }
 
     /**
@@ -39,7 +42,9 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $newPost = Product::create([
+            'manufacturer_id' => $request->manufacturer_id,
             'title' => $request->title,
+            'description' => $request->description,
             'short_notes' => $request->short_notes,
             'price' => $request->price
         ]);
@@ -66,8 +71,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $manufacturers = Manufacturer::all();
+
         return view('product.edit', [
             'product' => $product,
+            'manufacturers' => $manufacturers
         ]);
     }
 
@@ -81,7 +89,9 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         $product->update([
+            'manufacturer_id' => $request->manufacturer_id,
             'title' => $request->title,
+            'description' => $request->description,
             'short_notes' => $request->short_notes,
             'price' => $request->price
         ]);

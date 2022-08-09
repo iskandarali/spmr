@@ -10,4 +10,9 @@ class Manufacturer extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'address', 'phone', 'email'];
+
+    public function products()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

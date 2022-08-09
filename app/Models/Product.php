@@ -9,5 +9,15 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'short_notes', 'price'];
+    protected $fillable = ['manufacturer_id', 'title', 'description', 'short_notes', 'price'];
+
+    public function manufacturer()
+    {
+        return $this->hasOne(Manufacturer::class, 'id', 'manufacturer_id');
+    }
+
+    public function suppliers()
+    {
+        return $this->hasMany(Supplier::class);
+    }
 }

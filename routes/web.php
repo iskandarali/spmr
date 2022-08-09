@@ -3,6 +3,7 @@
 use App\Http\Controllers\FoodCategoryController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\SupplierController;
@@ -42,6 +43,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('supplier', SupplierController::class)->names('supplier');
 
     Route::resource('manufacturer', ManufacturerController::class)->names('manufacturer');
+
+    Route::resource('order', OrderController::class);
 
     Route::get('escribeme', function () {
         return "Contactme";
